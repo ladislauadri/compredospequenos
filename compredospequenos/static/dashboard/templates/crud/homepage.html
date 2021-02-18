@@ -1,0 +1,47 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+Painel
+{% endblock title %}
+    
+
+{% block body %}
+{% load static %}
+
+
+
+<div class="container">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  <div class="row">
+    
+    <div class="col-md-6 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Seja bem Vindo  {{ user.username }}!</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Hoje é {% now "l, d F Y H:i" %}</h6>
+                <p class="card-text">Você tem {{ listaDeAnuncios|length  }} anuncios criados. Crie novos anuncios ou crie promoções para os anuncios existentes.</p>
+
+                <div class="row">
+                    <div class="col ">
+                        <div class="card alert alert-info col">
+                          0  
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card alert alert-info">
+                            {{ categorias|length  }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
+  </div>
+
+
+
+{% endblock body %}
+    

@@ -1,0 +1,66 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+Anuncios
+{% endblock title %}
+    
+
+{% block buttonup %}
+<a href="{% url 'painel:CriarAnunciosDash' %}" class="btn btn-light-warning font-weight-bolder btn-sm">Criar novo Anuncio</a>
+{% endblock buttonup %}
+
+{% block body %}
+{% load static %}
+
+
+
+<div class="container">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  	<div class="row">
+		{% for anuncio in anuncios %}
+			<div class="card mb-3 col-12" >
+				<div class="row no-gutters">
+					<div class="col-md-2">
+													{% if anuncio.logo %}
+								<img src="{{anuncio.logo.url}}" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" class="card-img"/>
+							{% else %}
+								<img src="{% static  '/images/sem-foto.jpg' %}" class="card-img" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" />
+							{% endif %}
+					</div>
+					<div class="col-md-6">
+					<a href="{% url 'painel:DetalhesDoAnuncioDash' anuncio.slug %}">
+
+						<div class="card-body">
+							<h5 class="card-title">{{anuncio.nome}}</h5>
+							<h5 class="card-text"><small class="text-muted">{{anuncio.categoria}}</small></h5>
+							<p class="card-text">{{anuncio.municipio}}/{{anuncio.estado}}</p>
+							<p class="card-text"><small class="text-muted">{{anuncio.criado}}</small></p>
+
+
+
+
+
+						</div>
+						</a>
+
+					</div>
+										<div class="col-md-2">
+						<div class="container">
+							<div class="row">
+								<a href="{% url 'painel:AtualizarAnuncioDash' anuncio.slug %}" class="btn btn-outline-success btn-block">Alterar</a>
+								<a href="{% url 'painel:DeletarAnuncioDash' anuncio.slug %}" class="btn btn-outline-danger btn-block">Excluir</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+		
+	</div>
+</div>
+
+
+
+{% endblock body %}
+    

@@ -1,0 +1,132 @@
+{% load static %}{% load tz %}
+<div class="row row-eq-height artigo-lista" >
+  <div class="col-xs-12 col-md-7" style="padding: 0">
+    <div class="card-body" style="padding: 1px; background-color:white; margin-top:5px; border-radius:10px;border: #80808045 1px solid;">
+	<div style="margin: 10px">
+        <div
+          class="avatar"
+          href="#"
+          style="
+											width:50px;
+											height:50px;
+											border-radius:35px;
+											float:left;
+											  background-image:url('{{ artigo.username.image.url }}');
+											background-position: center; /* Center the image */
+											background-repeat: no-repeat; /* Do not repeat the image */
+											background-size: cover; /* Resize the background image to cover the entire container */
+											"
+        ></div>
+        Por
+        <a class="name" href="#"> <b>{{ artigo.username.get_full_name }}</b></a>
+		<p class="data">
+		{% if createdAt|date:"dmY" > now|date:"dmY" %}
+		(<i class="far fa-clock"></i>Há {{artigo.createdAt|date:"dmY"}})
+		{% else %}
+		(<i class="far fa-clock"></i>Há {{artigo.createdAt|timesince}})
+		{% endif %}
+
+		</span>
+      </p>
+      {% if 'mp4' in artigo.content.url %}
+
+      <div class="card-body embed-responsive embed-responsive-16by9" style="padding: 0;">
+        <video
+          id="my-video-{{artigo.pk}}"
+          class="video-js-{{artigo.pk}} video-js  embed-responsive-item"
+          controls
+          preload="auto"
+          width="auto"
+          height="300px"
+          poster="MY_VIDEO_POSTER.jpg"
+          data-setup="{}"
+        >
+          <source src="{{ artigo.content.url }}" type="video/mp4" />
+          <source src="{{ artigo.content.url }}" type="video/webm" />
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading
+            to a web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank"
+              >supports HTML5 video</a
+            >
+          </p>
+        </video>
+        <script>
+          var player{{artigo.pk}} = videojs('my-video-{{artigo.pk}}', {
+           "preload": "auto", "loop": true, "autoplay": true, "muted": true
+          });
+          var video{{artigo.pk}} = document.querySelector('.video-js-{{artigo.pk}}');
+
+          function isScrolledIntoView( element ) {
+          	var elementTop    = element.getBoundingClientRect().top,
+          		elementBottom = element.getBoundingClientRect().bottom;
+
+          	return elementTop >= 0 && elementBottom <= window.innerHeight;
+          }
+
+          window.addEventListener("scroll", function(){
+          if (isScrolledIntoView(video{{artigo.pk}})) {
+          	 player{{artigo.pk}}.play();
+          }
+          else {
+          	 player{{artigo.pk}}.pause()
+          }
+          })
+        </script>
+      </div>
+
+      {% endif %}
+      {% if 'jpg' in artigo.content.url %}
+
+      <div class="card-body"  style="padding: 0;">
+        <img src="{{ artigo.content.url }}" class="img-responsive"/> 
+        
+      </div>
+
+      {% endif %}
+      {% if 'jpeg' in artigo.content.url %}
+
+      <div class="card-body"  style="padding: 0;">
+        <img src="{{ artigo.content.url }}" class="img-responsive"/> 
+        
+      </div>
+
+      {% endif %}
+      {% if 'png' in artigo.content.url %}
+
+      <div class="card-body"  style="padding: 0;">
+        <img src="{{ artigo.content.url }}" class="img-responsive"/> 
+        
+      </div>
+
+      {% endif %}
+
+      {% if 'gif' in artigo.content.url %}
+
+      <div class="card-body"  style="padding: 0;">
+        <img src="{{ artigo.content.url }}" class="img-responsive"/> 
+        
+      </div>
+
+      {% endif %}
+
+      <h2>
+        <a href="{{ artigo.get_absolute_url }}" title="title"
+          >{{ artigo.content.extension }}</a
+        >
+      </h2>
+      
+      <!-- post-info -->
+      <div class="tag">
+        <div class="container-fluid">
+          <div class="row">
+
+            <p style="font-size: 16px;   margin: 10px 0;">
+            {{ artigo.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

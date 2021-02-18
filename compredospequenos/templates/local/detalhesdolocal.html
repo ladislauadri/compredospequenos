@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{detalhesDoLocal.nome}} - Negócio local em {{detalhesDoLocal.municipio}}/{{detalhesDoLocal.estado}} || Pequeno Sem Crise
+{% endblock %}
+
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "LocalBusiness",
+  "name" : "{{detalhesDoLocal.nome}}",
+  "image" : "{% if detalhesDoLocal.logo %}{{detalhesDoLocal.logo.url}}{% else %} https://pequenosemcrise.com.br/static/images/sem-foto.jpg{% endif %}",
+  "telephone" : "{{detalhesDoLocal.telefone}}",
+  "address" : {
+    "@type" : "PostalAddress",
+    "streetAddress" : "{{detalhesDoLocal.endereco}}",
+    "addressLocality" : "{{detalhesDoLocal.municipio}}",
+    "addressRegion" : "{{detalhesDoLocal.estado}}",
+    "postalCode" : "{{detalhesDoLocal.cep}}"
+  },
+  "url" : "{{detalhesDoLocal.site}}"
+}
+</script>
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+	 <style>
+.post-item .text h1 a:after, .post-item .text h1 span:after {
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: 2px;
+    background: #db2e1c;
+    width: 3px;
+    height: 17px;
+}
+ul.breadcrumb {
+    background-color: transparent;
+    border: 1px black solid;
+    margin-top: 20px;
+}
+
+.post-item.cat-1.ver5.overlay {
+
+}
+.mapIconCat {
+	border-radius: 50%;
+	behavior: url(PIE.htc);
+	width: 50px;
+	height: 50px;
+	background: #fff2e9;
+	border: 3px solid #47005e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mapIconCat i {
+	color: #47005e;
+}
+
+
+
+</style>
+{% endblock head %}
+
+
+{% block body %}
+{% load static %}
+
+{% load l10n %}
+
+				  <div class="container space-20 space-padding-tb-20">
+             <ul class="breadcrumb">
+						 		<li><a href="#">Home </a></li>
+								<li><a href="{% url 'locais:listaDeLocaisPorCategoria' local.categoria.slug%}"> <i class="far fa-hand-point-right"></i> {{detalhesDoLocal.categoria}}</a></li>
+								<li><i class="far fa-hand-point-right"></i> {{detalhesDoLocal.nome}}</li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="single-post">
+                        <div class="blog-post-item cat-1 box">
+                            <div class="box-user space-30">
+                                <div class="box">
+                                    <div class="avatar">
+																			<figure> 
+																				{% if detalhesDoLocal.logo %}
+																				<img src="{{detalhesDoLocal.logo.url}}"  class="img-responsive" title="{{detalhesDoLocal.nome}}" alt="{{detalhesDoLocal.nome}}" />
+																				{% else %}
+																					<img src="{% static  '/images/sem-foto.jpg' %}" class="img-responsive" title="{{detalhesDoLocal.nome}}" alt="{{detalhesDoLocal.nome}}" /> 
+																				{% endif %}
+																			</figure>
+                                    </div>
+                                    <div class="text">
+                                        <h3>{{detalhesDoLocal.nome}} <span class="user-level">{{detalhesDoLocal.categoria}}</span></h3>
+																				<em>Criado em:{{detalhesDoLocal.criado}}</em>
+                                        {{detalhesDoLocal.descricao|safe}}
+                                        <div class="social">
+											{% for Link in listaDeLinks %}
+												{% if Link.tipo == 'FACEBOOK' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-facebook-f"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'SITE' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fas fa-link"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'TELEFONE' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fas fa-phone"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'WHATSAPP' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-whatsapp"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'INSTAGRAM' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-instagram"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'LINKEDIN' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-linkedin-in"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'EMAIL' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="far fa-envelope"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'TIKTOK' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-tiktok"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'TWITTER' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-twitter"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'YOUTUBE' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-youtube"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'TELEGRAM' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-telegram"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'DISCORD' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-discord"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'TWITCH' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-twitch"></i>
+														</button>
+													</a>
+												{% endif %}
+												{% if Link.tipo == 'SNAPCHAT' %}
+													<a href="{{Link.valor}}">
+														<button type="button" class="btn btn-outline-primary">
+															<i class="fab fa-snapchat"></i>
+														</button>
+													</a>
+												{% endif %}
+
+											{% endfor%}
+																						
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End signle-post -->
+                </div>
+                <div class="col-md-6">
+											
+
+										{% for local in listaDeLocais %}
+										<small>A localização apresentada no mapa é uma aproximação do local</small>
+<div style="width: 100%; height:30vh;" id="map"></div>
+			{% comment %} {% if forloop.counter|divisibleby:2 %}
+                <div class="col-md-4 col-xs-12">
+                    <script  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-format="fluid"
+						data-ad-layout-key="-fb+5w+4e-db+86"
+						data-ad-client="ca-pub-5786248284198381"
+						data-ad-slot="4241003547">
+					</ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+                </div>
+        	{% endif %} {% endcomment %}
+			<div class="card col-md-12 col-xs-12">
+					<div class="container-fluid">
+						<div class="row row-eq-height">
+							<div class= "flex-grow-1" style="margin:10px;">
+							<a class="images" href="{% url 'locais:detalhesDoLocal' local.local.slug %}" title="images" >
+								<h2 class="card-title">{{local.local.nome}} - <span style="color:orange;">{{local.bairro}}</span></h2>
+							</a>
+								<p class="local-endereco"><i class="fas fa-map-marked-alt"></i>
+									{% if local.endereco %}
+									{{local.endereco}} 
+									{{local.numero}} 
+									{% if local.complemento %}
+									- {{local.complemento}}
+									{% endif %}
+									, {{local.municipio}}/
+									{{local.estado}} - 
+									{{local.cep}}
+									{% else %}
+									{{local.municipio}}/{{local.estado}} - {{local.cep}}
+									{% endif %}
+								</p>
+								<p>{{local.local.categoria.icone.as_html}}{{local.local.categoria}}</p>
+							</div>
+							</div>
+							</div>
+            </div>
+
+		
+		{% endfor %}
+										
+										<div>
+											<h6>Endereço</h6>
+											{% if detalhesDoLocal.endereco %}
+											{{detalhesDoLocal.endereco}} 
+											{{detalhesDoLocal.numero}} 
+											{% if detalhesDoLocal.complemento %}
+											- {{detalhesDoLocal.complemento}}
+											{% endif %}
+											, {{detalhesDoLocal.municipio}}/
+											{{detalhesDoLocal.estado}} - 
+											{{detalhesDoLocal.cep}}
+											{% else %}
+											{{detalhesDoLocal.municipio}}/{{detalhesDoLocal.estado}} - {{detalhesDoLocal.cep}}
+
+											{% endif %}
+											<a href="https://www.google.com/maps/search/{{detalhesDoLocal.cep}}+numero+{{detalhesDoLocal.numero}}" target="_blank"> <strong>Ver Rotas</strong></a>
+										</div>
+										<script>
+										const here = {
+											apiKey:'Sco_-HzVL-53Drcv-N4lRio6YmYRJN9Bj7UmgbAB80I'
+										}
+										const style = 'reduced.night';
+										let mymap = L.map('map').setView([{% localize off %}{{detalhesDoLocal.local.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{detalhesDoLocal.local.localizacao.x|unlocalize }}{% endlocalize %}], 20);
+										mapLink =
+											'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+										L.tileLayer(
+											`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?apiKey=${here.apiKey}&ppi=320`, {
+												attribution: '&copy; ' + mapLink + ' Contributors',
+												maxZoom: 18,
+											}).addTo(mymap);
+
+
+
+										</script> 
+										<script>
+																				var fontAwesomeIcon = L.divIcon({
+																					html: '<div class="mapIconCat" style="">{{detalhesDoLocal.categoria.imagem.as_html}}</div>',
+																					iconSize: [20, 20],
+																					className: 'myDivIcon'
+																			});
+
+																		{% for local in listaDeLocais %}
+
+																		L.marker([{% localize off %}{{local.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{local.localizacao.x|unlocalize }}{% endlocalize %}],{ icon:  fontAwesomeIcon}).addTo(mymap)
+																		.bindPopup(`<div class="container"><div class="row"><div style="width:100px;float:left;"><img src="{{local.logo.url}}"  class="img-fluid" title="{{local.nome}}" alt="{{local.nome}}" style="width:100%;" /></div><div style="float:left;"><h3 style="display: inline-block; width: 200px;padding-left: 10px;position: relative;color: #000; transition: all 0.5s ease 0s;font: 400 18px/22px 'Oswald';">{{local.nome}}</h3><h4>{{local.categoria.nome}}</h4></div></div>`).openPopup();
+
+																		{% endfor %}
+									</script>
+                </div>
+            </div>
+
+        <!-- End container -->
+
+
+{% comment %} 
+						<div class="indent_title_in">
+							<i class="pe-7s-headphones"></i>
+							<h3>Promoções Disponíveis</h3>
+						</div>
+						<div class="wrapper_indent row">
+						{% for promocao in listaDePromocoes %}
+						<p class="row">
+							<p class="col-4">
+							{% if promocao.fotoDoLocal %}
+									<img src="{{promocao.fotoDoLocal.url}}" title="{{promocao.nome}}" alt="{{promocao.nome}}" class="card-img"/>
+								{% else %}
+									<img src="{% static  '/images/sem-foto.jpg' %}" class="card-img" title="{{promocao.nome}}" alt="{{promocao.nomeDaOferta}}" />
+								{% endif %}
+							</p>
+							<p class="col-8">
+							<strong>{{promocao.nomeDaOferta}}</strong><br>
+							{{promocao.info|safe|striptags}}
+							</p>
+						</p>
+						
+						{% endfor %} {% endcomment %}
+
+
+
+{% endblock body %}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>{{ request.scheme }}://{{request.get_host}}</loc>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+{% for pagina in paginas %}
+<url>
+  <loc>{{ request.scheme }}://{{request.get_host}}{{ pagina.get_absolute_url }}</loc>
+  <lastmod>{{pagina.atualizado|date:"Y-m-d" }}</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+{% endfor %}
+{% for anuncio in anuncios %}
+<url>
+  <loc>{{ request.scheme }}://{{request.get_host}}{{ anuncio.get_absolute_url }}</loc>
+  <lastmod>{{anuncio.atualizado|date:"Y-m-d" }}</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+{% endfor %}
+{% for artigo in artigos %}
+<url>
+  <loc>{{ request.scheme }}://{{request.get_host}}{{ artigo.get_absolute_url }}</loc>
+  <lastmod>{{artigo.atualizado|date:"Y-m-d" }}</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+{% endfor %}
+</urlset>

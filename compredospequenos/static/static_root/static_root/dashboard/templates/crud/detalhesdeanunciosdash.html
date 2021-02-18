@@ -1,0 +1,135 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+{{anuncio.nome}} - Anuncio
+{% endblock title %}
+{% block head %}
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+   {% endblock head %}
+    
+
+{% block body %}
+{% load static %}
+
+<style>
+.row.no-gutters {
+    padding: 10px;
+}
+</style>
+
+
+<div class="container">
+  	<div class="row">
+		<div class="card mb-3 col-12" >
+			<div class="row no-gutters">
+				<h2 class="card-title">{{anuncio.nome}}</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-2">
+								{% if anuncio.logo %}
+									<img src="{{anuncio.logo.url}}" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" class="card-img"/>
+								{% else %}
+									<img src="{% static  '/images/sem-foto.jpg' %}" class="card-img" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" />
+								{% endif %}
+							</div>
+							<div class="col-md-6">
+
+								<h5 class="card-text"><small class="text-muted">{{anuncio.tipoDeItem}}/{{anuncio.categoria}}</small></h5>
+								<h5 class="card-text"><small class="text-muted">{{anuncio.estado}}/{{anuncio.municipio}}</small></h5>
+								<p class="card-text"><strong>Link Para Obter a Promoção:</strong></p>
+								<p class="card-text">{{anuncio.linkDeCompra}}</p>
+								<p class="card-text"><strong>Descrição:</strong></p>
+								<p class="card-text">{{anuncio.descricao|safe}}</p>
+								<p class="card-text"><strong>Telefone: </strong>{{anuncio.telefone}}</p>
+								<p class="card-text"><strong>Whatsapp:</strong> <a href="https://wa.me/{{anuncio.whatsapp}}" target="_blank">{{anuncio.whatsapp}}</a></p>
+								<p class="card-text"><strong>Site: </strong> <a href="{{anuncio.instagram}}"  target="_blank">{{anuncio.site}}</a></p>
+
+								<p class="card-text"><strong>Facebook: </strong> <a href="{{anuncio.facebook}}"  target="_blank">{{anuncio.facebook}}</a></p>
+								<p class="card-text"><strong>Instagram: </strong> <a href="{{anuncio.instagram}}"  target="_blank">{{anuncio.instagram}}</a></p>
+								<p class="card-text"><small class="text-muted">{{anuncio.dataCriacao}}</small></p>
+								<div class="container">
+									<div class="row">
+										<a href="{% url 'painel:AtualizarAnuncioDash' anuncio.slug %}" class="btn btn-outline-success btn-block">Alterar</a>
+										<a href="{% url 'painel:DeletarAnuncioDash' anuncio.slug %}" class="btn btn-outline-danger btn-block">Excluir</a>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-4">
+									<div class="box_general_3 booking">
+
+						<div class="title">
+						<h3>Localização</h3>
+						<small>A localização apresentada no mapa é uma aproximação do local</small>
+						</div>
+						<div class="row">
+
+							<style>
+							#mapid { 
+								height: 180px; 
+								width: 100%; 
+								}
+							</style>
+								 <div id="mapid"> </div>
+								 <script>
+								 	let mymap = L.map('mapid').setView(["{{anuncio.localizacao.y|escapejs}}","{{anuncio.localizacao.x|escapejs}}"], 15);
+									L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+										attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+										subdomains: ['a','b','c']
+									}).addTo( mymap );
+									var marker = L.marker(["{{anuncio.localizacao.y|escapejs}}","{{anuncio.localizacao.x|escapejs}}"]).addTo(mymap);
+								 
+
+								 </script>
+
+							<ul class="contacts">
+								<li>
+											<h6>Endereço</h6>
+											{% if anuncio.endereco %}
+											{{anuncio.endereco}} 
+											{{anuncio.numero}} 
+											{% if anuncio.complemento %}
+											- {{anuncio.complemento}}
+											{% endif %}
+											, {{anuncio.municipio}}/
+											{{anuncio.estado}} - 
+											{{anuncio.cep}}
+											{% else %}
+											{{anuncio.municipio}}/{{anuncio.estado}} - {{anuncio.cep}}
+
+											{% endif %}
+											<a href="https://www.google.com/maps/search/{{anuncio.cep}}+numero+{{anuncio.numero}}" target="_blank"> <strong>Ver Rotas</strong></a>
+											
+											
+								</li>
+							</ul>
+						</div>
+						<!-- /row -->
+				</div>
+
+							</div>
+						
+						</div>
+					</div>
+
+			</div>
+
+		</div>
+
+
+
+		
+	</div>
+</div>
+
+
+
+
+{% endblock body %}
+    

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{detalhesDoAnuncio.nome}} - Negócio local em {{detalhesDoAnuncio.municipio}}/{{detalhesDoAnuncio.estado}} || Pequeno Sem Crise
+{% endblock %}
+
+
+{% block body %}
+{% load static %}
+
+
+
+
+<main>
+	<div id="breadcrumb">
+		<div class="container">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">{{detalhesDoAnuncio.categoria}}</a></li>
+				<li><a href="#">{{detalhesDoEstado.pais}}</a></li>
+				<li><a href="#">{{detalhesDoAnuncio.estado}}</a></li>
+				<li><a href="#">{{detalhesDoAnuncio.municipio}}</a></li>
+				<li>{{detalhesDoEstado.nome}}</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /breadcrumb -->
+
+	<div class="container margin_60">
+		<div class="row"> 
+					<ul class="row">	
+				{% for municipio in listaDeMunicipios %}
+
+					
+						<li class="col-lg-3"><a href="/municipios/{{municipio.slug}}">{{municipio.nome}}</a></li>
+					
+
+				{% endfor %}
+				</ul>
+
+
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</main>
+<!-- /main -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %}

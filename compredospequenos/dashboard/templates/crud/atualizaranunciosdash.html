@@ -1,0 +1,52 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+Atualizar {{nomeDaOferta}} - Anuncios
+{% endblock title %}
+    
+
+{% block body %}
+{% load static %}
+    {{ form.media.css }}
+
+{% load crispy_forms_tags %}
+
+<style>
+.row.no-gutters {
+    padding: 10px;
+}
+</style>
+
+
+<div class="container">
+  	<div class="row">
+		<div class="card mb-3 col-12" >
+			<div class="row no-gutters">
+				<h2 class="card-title"></h2>
+				<div class="container">
+					<div class="row">
+						<form method="post"  enctype="multipart/form-data">{% csrf_token %}
+							{{ form.non_field_errors }}
+							{{ form.source.errors }}
+							{{ form.source }}
+							<div class="form-group">
+								{{ form.media }}
+								{{ form.as_p }}
+								<input type="submit" value="Atualizar">
+							</div>
+						</form>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+{% endblock body %}
+    

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+            <div class="page-404 center space-padding-tb-40">
+								<h3 class="space-30">Ops..</h3>
+                <h1><b>Desculpe-nos. O registro para novos usuários está momentaneamente desativado.</b></h1>
+                <p class="space-30">Se você precisa registrar uma nova conta, Entre em Contato pelo <a href="https://api.whatsapp.com/send?phone=5511984969425" title="Whatsapp">Nosso Whatsapp. <i class="fab fa-whatsapp"></i></a></p>
+                {% comment %} <form class="form-404" action="#" method="get">
+                    <input type="text" class="form_control" placeholder="Type your email address ...">
+                    <button class="icon-search" type="submit"><i data-toggle="dropdown" class="fa fa-search"></i></button>   
+                </form> {% endcomment %}
+            </div>
+            <!-- End page-404 -->
+            <div class="banner center space-padding-tb-60">
+                <img class="img-responsive" src="assets/images/banner-footer-bottom.jpg" alt="images">
+            </div>
+        </div>
+
+
+{% comment %} <main>
+	
+	<div class="bg_color_2">
+		<div class="container margin_60_35">
+			<div id="register">
+				<h1>Registre e aproveite todos os benefícios do MPSC para você!</h1>
+				<div class="row justify-content-center">
+					<div class="col-md-5">
+						<form method="post" class="form">
+							{% csrf_token %}
+							<div class="box_form">
+								{{ form.non_field_errors }}
+
+								{% for hidden_field in form.hidden_fields %}
+								  {{ hidden_field.errors }}
+								  {{ hidden_field }}
+								{% endfor %}
+								<div class="form-group">
+									{{ user_form }}
+								</div>
+
+								<div class="form-group text-center add_top_30">
+									<input class="btn_1" type="submit" value="Registrar sua conta">
+								</div>
+							</div>
+							<h6 class="text-center link_bright"> Já tem uma conta? <strong><a href="/contas/entrar">Entre agora</a></strong>. </h6>
+						</form>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /register -->
+		</div>
+	</div>
+</main>
+<!-- /main --> {% endcomment %}
+
+
+
+
+{% endblock body %}

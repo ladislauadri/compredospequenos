@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block title %} Produtos e serviços à um clique de
+distância - Compre dos negócios locais com segurança | Pequeno Sem Crise {%
+endblock %} {% endblock title %}{% block head %}
+<style>
+  .tiposDeLocais > i {
+    font-size: 60px;
+    width: 100%;
+    text-align: center;
+  }
+  .tiposDeLocais > h2 {
+    font: 400 36px/36px "Oswald";
+    border-left: 10px red solid;
+    margin: 30px;
+    padding-left: 10px;
+  }
+  .google-auto-placed {
+    display: none;
+  }
+  .titulo-categoria {
+    font: 400 52px/52px "Oswald";
+    text-align:center;
+
+} 
+  .botao-voltar {
+    margin:30px 0;
+
+}
+  a > .tiposDeLocais {
+    color: black;
+}
+</style>
+{% endblock head %} {% block body %} {% load static %}
+<h1 class="titulo-categoria">Categorias em "{{categoriaPai.nome}}"</h1>
+<a href="{% url 'locais:listaDeLocais' %}">
+  <div class="d-grid gap-2 col-md-auto mx-auto"  style="width:300px;">
+      <button type="button" class="btn btn-dark botao-voltar">Voltar para a lista de Categorias</button>
+  </div>
+</a>
+<div class="container-fluid">
+    <div class="row row-eq-height">
+    	{% for local in listaDeSubCategorias %}
+      		<div class="col-xs-3 col-md-3">
+            <a href="{% url 'locais:listaDeLocaisPorCategoria' local.slug%}">
+        		<div class="tiposDeLocais">
+          			{{local.icone.as_html}}
+          			<h2>{{local.nome}}</h2>
+        		</div>
+            </a>
+      		</div>
+		{% endfor %}
+    </div>
+</div>
+ {% endblock body %}

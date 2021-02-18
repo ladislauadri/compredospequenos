@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Produtos e serviços à um clique de distância - Compre dos negócios locais com segurança | Pequeno Sem Crise
+{% endblock %}
+
+{% block body %}
+{% load static %}
+{% load l10n %}
+{% load fontawesome_5 %}
+{% fontawesome_5_static %} 
+
+<style>
+
+.post-item.cat-1.ver5.overlay {
+
+}
+.mapIconCat {
+	border-radius: 50%;
+	behavior: url(PIE.htc);
+	width: 50px;
+	height: 50px;
+	background: #fff2e9;
+	border: 3px solid #47005e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mapIconCat i {
+	color: #47005e;
+}
+  .titulo-categoria {
+    font: 400 52px/52px "Oswald";
+    text-align:center;
+	margin: 20px 0;
+
+}
+  .local-item {
+    text-align:center;
+	color:black;
+
+}
+  .local-item h2{
+    font: 400 32px/32px "Oswald";
+
+
+}
+  .local-item i{
+    margin:0 20px;
+
+
+}
+  .card-header i{
+    margin:0 20px;
+}
+  .card-header{
+    text-align:center;
+}
+  h2{
+	font: 400 20px/26px "Oswald";
+    padding: 5px 0;
+    text-transform: uppercase;
+	color:#000;
+}
+  .card-img-top{
+	width:100%;
+    height:auto;
+}
+  [class*='col']{
+	padding:0;
+}
+
+
+</style>
+<div class="container-fluid">
+	<div class="row">
+		{% if listaDeLocais|length == 1 %}
+		<h1 class="titulo-categoria">Existe {{ listaDeLocais|length }} negócio em "{{categoriaPai.nome}}"</h1>
+		{% else %}
+		<h1 class="titulo-categoria">Existem {{ listaDeLocais|length }} negócios em "{{categoriaPai.nome}}"</h1>
+		{% endif %}
+	</div>
+	<div class="row row-eq-height">
+	<div class="col-md-8 col-xs-12">
+	<div class="container-fluid">
+	<div class="row row-eq-height">
+		{% for local in listaDeLocais %}
+
+			{% comment %} {% if forloop.counter|divisibleby:2 %}
+                <div class="col-md-4 col-xs-12">
+                    <script  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-format="fluid"
+						data-ad-layout-key="-fb+5w+4e-db+86"
+						data-ad-client="ca-pub-5786248284198381"
+						data-ad-slot="4241003547">
+					</ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+                </div>
+        	{% endif %} {% endcomment %}
+			<div class="card col-md-12 col-xs-12">
+					<div class="container-fluid">
+						<div class="row row-eq-height">
+							<div class="col-md-2 col-xs-12">
+								<div class="col-xs-12 col-md-12">
+								<a class="images" href="{% url 'locais:detalhesDoLocal' local.local.slug %}" title="images" >
+								{% if local.local.logo %}
+									<img class='card-img-top' src="{{local.local.logo.url}}" title="{{local.local.nome}}" alt="{{local.local.nome}}">
+								{% else %}
+									<img class='card-img-top'  src="{% static  '/images/sem-foto.jpg' %}" title="{{local.local.nome}}" alt="{{local.local.nome}}">
+								{% endif %}
+								</a>
+
+								</div>
+							</div>
+							<div class= "flex-grow-1" style="margin:10px;">
+							<a class="images" href="{% url 'locais:detalhesDoLocal' local.local.slug %}" title="images" >
+								<h2 class="card-title">{{local.local.nome}} - <span style="color:orange;">{{local.bairro}}</span></h2>
+							</a>
+								<p class="local-endereco"><i class="fas fa-map-marked-alt"></i>
+									{% if local.endereco %}
+									{{local.endereco}} 
+									{{local.numero}} 
+									{% if local.complemento %}
+									- {{local.complemento}}
+									{% endif %}
+									, {{local.municipio}}/
+									{{local.estado}} - 
+									{{local.cep}}
+									{% else %}
+									{{local.municipio}}/{{local.estado}} - {{local.cep}}
+									{% endif %}
+								</p>
+								<p>{{local.local.categoria.icone.as_html}}{{local.local.categoria}}</p>
+							</div>
+							</div>
+							</div>
+            </div>
+
+		
+		{% endfor %}
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+{% endblock body %}

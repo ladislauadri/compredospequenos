@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Criar nova reclamação | VAMORESOLVÊ Condomínios & Vizinhança
+{% endblock title %}
+{% block head %}
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Article",
+  "name" : "{{ocorrencia.title}}",
+  "author" : {
+    "@type" : "Person",
+    "name" : "{{ocorrencia.autor.get_full_name}}"
+  },
+  "datePublished" : "{{ocorrencia.date_published|date:"d/m/Y" }}",
+  "image" : "{{ocorrencia.image.url}}",
+  "ocorrenciaSection" : "{{ocorrencia.categoria}}",
+  "ocorrenciaBody" : "{{ocorrencia.descrição|safe|truncatechars:200|striptags}}"
+}
+</script>
+{% comment %} <meta property="og:url" content="{{ ocorrencia.get_absolute_url }}" /> {% endcomment %}
+<meta property="og:title" content="{{ocorrencia.titulo}}" />
+<meta property="og:description" content="{{ocorrencia.descrição|safe|truncatechars:200|striptags }}" />
+<meta property="og:image" content="{{ocorrencia.image.url}}" />
+<meta property="og:image:alt" content="{{ocorrencia.title}}" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="{{ocorrencia.title}}" />
+<meta property="twitter:description" content="{{ocorrencia.descrição|safe|truncatechars:200|striptags  }}" />
+<meta property="twitter:image" content="https://pequenosemcrise.com.br{{ocorrencia.image.url}}" />
+
+
+
+  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+	  .form-ocorrencia input, .form-ocorrencia   select, .form-ocorrencia   textarea{
+		  	display: block;
+			width: 100%;
+			padding: .375rem .75rem;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			background-color: #fff;
+			background-clip: padding-box;
+			border: 1px solid #ced4da;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			border-radius: .25rem;
+				border-bottom-right-radius: 0.25rem;
+				border-bottom-left-radius: 0.25rem;
+			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	  }
+	  .form-ocorrencia  {
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+    </style>
+   {% endblock head %}
+    
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+<div class="row">
+<div class="col-12">
+{% if request.user.is_anonymous == True %}
+			<h2 style="font-weight:600; font: 400 25px/25px 'Oswald'; text- ">Olá visitante, parece que você não está logado em nosso sistema. Se vocé registrar sua demanda 
+      sem fazer o login, você não poderá o seu progresso. <a href="{% url 'contas:register' %}">Clique aqui para criar sua conta gratuita</a>.</h2>
+{% endif%}
+
+<form class="form-ocorrencia"  method="post" action="{% url 'ocorrencias:criarOcorrencia' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+					<div class="alert alert-danger" role="alert">
+					Há erros no seu formulário. Revise-os e tente novamente.
+					{{ form.non_field_errors }}
+					{% for hidden_field in form.hidden_fields %}
+								  {{ hidden_field.errors }}
+								  {{ hidden_field }}
+								{% endfor %}
+					</div>
+				{% endif %}
+    {{ form.media.js }}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-outline-success">Salvar</button>
+</form>
+
+</div>
+</div>
+</div>
+{% endblock body %}
+    

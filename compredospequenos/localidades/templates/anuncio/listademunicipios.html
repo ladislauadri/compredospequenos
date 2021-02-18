@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Produtos e serviços à um clique de distância - Compre dos negócios locais com segurança | Pequeno Sem Crise
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<main>
+	<div id="results">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h4>Sua busca retornou <strong>
+						{% if listaDeMunicipios|length == 1 %}
+						{{ listaDeMunicipios|length }} negócio</strong></h4>
+						{% else %}
+						{{ listaDeMunicipios|length }} negócios</strong></h4>
+						{% endif %}
+				</div>
+				<div class="col-md-6">
+					<div class="search_bar_list">
+						<form method="GET" action="{% url 'Municipios:listaDeMunicipios'  %}"></form>
+						<input class="form-control" type="text" value="Nome do produto..." name="busca" onfocus="this.value = '';"
+						onblur="if (this.value == '') {this.value = 'Nome do produto...';}" required="">
+						<input type="submit" value="Buscar">
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /results -->
+
+
+	
+	<div class="container margin_60_35">
+		<div >
+			<div >
+					<ul class="row">	
+				{% for municipio in listaDeMunicipios %}
+
+					
+						<li class="col-lg-3"><a href="/municipios/{{municipio.slug}}">{{municipio.nome}}</a></li>
+					
+
+				{% endfor %}
+				</ul>
+
+				<!-- /strip_list -->
+
+				
+				<nav aria-label="" class="add_top_20">
+					<ul class="pagination pagination-sm">
+						{% if listaDeMunicipios.has_previous %}
+						<li class="page-item active">
+							<a class="page-link" href="?page=1" >Primeira</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeMunicipios.previous_page_number }}" tabindex="-1">Anterior</a>
+						</li>
+						{% endif %}
+						{% for pages in listaDeMunicipios.paginator.page_range %}
+						{% if listaDeMunicipios.number == pages %}
+						<li class="page-item active"><a href="" class="page-link">{{pages}}</a></li>
+						{% else %}
+						<li class="page-item"><a href="?page={{ pages }}" class="page-link">{{pages}}</a></li>
+						{% endif %}
+
+								{% endfor %}
+
+								{% if listaDeMunicipios.has_next %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeMunicipios.next_page_number }}">Próximo</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeMunicipios.paginator.num_pages }}">Último</a>
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+				<!-- /pagination -->
+			</div>
+			<!-- /col -->
+			
+			
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</main>
+
+
+
+{% endblock body %}

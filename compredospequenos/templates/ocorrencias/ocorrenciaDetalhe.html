@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ocorrencia.titulo}} - {{ocorrencia.categoria }} | Viviré Media
+{% endblock title %}
+{% block head %}
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Article",
+  "name" : "{{ocorrencia.title}}",
+  "author" : {
+    "@type" : "Person",
+    "name" : "{{ocorrencia.autor.get_full_name}}"
+  },
+  "datePublished" : "{{ocorrencia.date_published|date:"d/m/Y" }}",
+  "image" : "{{ocorrencia.image.url}}",
+  "ocorrenciaSection" : "{{ocorrencia.categoria}}",
+  "ocorrenciaBody" : "{{ocorrencia.descrição|safe|truncatechars:200|striptags}}"
+}
+</script>
+{% comment %} <meta property="og:url" content="{{ ocorrencia.get_absolute_url }}" /> {% endcomment %}
+<meta property="og:title" content="{{ocorrencia.titulo}}" />
+<meta property="og:description" content="{{ocorrencia.descrição|safe|truncatechars:200|striptags }}" />
+<meta property="og:image" content="{{ocorrencia.image.url}}" />
+<meta property="og:image:alt" content="{{ocorrencia.title}}" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="{{ocorrencia.title}}" />
+<meta property="twitter:description" content="{{ocorrencia.descrição|safe|truncatechars:200|striptags  }}" />
+<meta property="twitter:image" content="https://pequenosemcrise.com.br{{ocorrencia.image.url}}" />
+
+
+
+	 <style>
+.post-item .text h1 a:after, .post-item .text h1 span:after {
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: 2px;
+    background: #db2e1c;
+    width: 3px;
+    height: 17px;
+}
+ul.breadcrumb {
+    background-color: transparent;
+    border: 1px black solid;
+    margin-top: 20px;
+}
+.post-area .post-info{ position: relative; padding: 30px 0; }
+
+.post-area .post-info .left-area{ height: 70px; width: 70px; border-radius: 100px; overflow: hidden; position: absolute;
+	top: 50%; margin-top: -35px; border: 1px solid #fff; box-shadow: 0px 0px 5px rgba(0,0,0,.3); }
+
+.post-area .post-info .middle-area{ padding-left: 90px; display: inline-block; }
+.ocorrencia-author-profile-image {
+    width: 50px;
+   height: 50px;
+   max-width: 50px;
+   max-height: 50px;
+   object-fit: cover;
+  }
+  img.ocorrencia-author-profile-image {
+    border-radius: 35px;
+}
+</style>
+   {% endblock head %}
+    
+
+{% block body %}
+{% load static %}
+{% load gravatar %}
+
+                                        <a href="mailto:?subject={{ ocorrencia.title }}&amp;body=Confira esse artigo {{ request.build_absolute_uri }}" target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #b3b3b3; height: 30px; font-size: 10px; border: 0px;"><i class="fas fa-envelope-open-text"></i> | Compartilhar via email</button>
+                                        </a>
+
+                                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}"  target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #0a66c2; height: 30px; font-size: 10px; border: 0px;"><i class="fab fa-linkedin"></i> | Compartilhar no LinkedIn</button>
+                                        </a>
+
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #0b86ee; height: 30px; font-size: 10px; border: 0px;"><i class="fab fa-facebook-square"></i> | Compartilhar no Facebook</button>
+                                        </a>
+
+                                        <a href="http://twitter.com/share?text={{ ocorrencia.title }}. &url={{ request.build_absolute_uri }}" target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #1da1f2; height: 30px; font-size: 10px; border: 0px;"><i class="fab fa-twitter-square"></i> | Compartilhar no Twitter</button>
+                                        </a>
+
+                                        <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #06d755; height: 30px; font-size: 10px; border: 0px;"><i class="fab fa-whatsapp-square"></i> | Compartilhar no Whatsapp</button>
+                                        </a>
+
+                                        <a href="https://telegram.me/share/url?url={{ request.build_absolute_uri }}&text={{ ocorrencia.title }}" target="_blank">
+                                            <button type="button" class="btn btn-primary" style="background-color: #28a8ea; height: 30px; font-size: 10px; border: 0px;"><i class="fab fa-telegram"></i> | Compartilhar no Telegram</button>
+                                        </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card text-center">
+  <div class="card-header">
+    {{ocorrencia.categoria}} <span class="badge bg-warning text-dark"> {{ocorrencia.estadoDaOcorrencia}}</span>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ocorrencia.titulo}}</h5>
+    <p class="card-text"><small class="text-muted">
+    {% if ocorrencia.endereco %}
+    {{ocorrencia.endereco}},
+    {% endif %}
+    {% if ocorrencia.numero %}
+    {{ocorrencia.numero}} 
+    {% endif %}
+    {% if ocorrencia.complemento %}
+    {{ocorrencia.complemento}}|
+    {% endif %}
+    {% if ocorrencia.municipio %}
+    {{ocorrencia.municipio}}/
+    {% endif %}
+    {% if ocorrencia.estado %}
+    {{ocorrencia.estado}} -
+    {% endif %}
+    {% if ocorrencia.cep %}
+    {{ocorrencia.cep}}
+    {% endif %}
+    
+
+
+
+
+
+</small></p>
+    <div class="card-text">{{ocorrencia.descrição|safe}}</div>
+    {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
+  </div>
+  <div class="card-footer text-muted">
+    {{ocorrencia.dataCriacao}}
+  </div>
+</div>
+
+
+{% comment %} {{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}}
+{{ocorrencia.}} {% endcomment %}
+
+
+{% endblock body %}
+    

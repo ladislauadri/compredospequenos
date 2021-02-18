@@ -1,0 +1,153 @@
+{% extends 'base.html' %} 
+{% block title %}Condomínios & Vizinhança | Ações Para Unir Pessoas {% endblock title %}
+{% block head%}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap" rel="stylesheet"> 
+<meta name="description" content="Procurando por noticias recentes e opiniões de especialistas sobre o que acontece nos condomínios e na sua vizinhança? Então clique aqui e confira" />
+<style>
+  .card-body > h2 > a {
+    display: inline-block;
+    width: 100%;
+    padding-left: 10px;
+    position: relative;
+    color: black;
+    transition: all 0.5s ease 0s;
+    font: 400 30px/32px "Oswald";
+	border-left: 10px red solid;
+    padding-left: 10px;
+  }
+  .tag > p > i {
+    padding: 0 8px;
+  }
+  .tag > a > i {
+    padding: 0 8px;
+  }
+  .article-author-profile-image {
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+  }
+  img.article-author-profile-image {
+    border-radius: 35px;
+  }
+.google-auto-placed {
+
+    display: none;
+}
+
+.tag-item > i {
+    margin: 0 10px;
+}
+.tag-item > a > i {
+    margin: 0 10px;
+}
+.tag {
+    font-size: 12px;
+}
+.title-v1 {
+    font: 400 1rem "Oswald";
+    border-left: 10px red solid;
+    margin: 30px;
+    padding-left: 10px;
+}
+.artigo-lista {
+
+    padding: 10px 0;
+}
+.artigo-publicidade {
+    max-width: 900px;
+}
+.iframe-holder{
+   position: relative;
+  	display: grid;
+  }
+.iframe-holder iframe {
+      position: absolute;
+  grid-area: 16/4;
+  width:100%;
+}
+.data {
+	font-size: 12px;
+}
+</style>
+  <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+
+{% endblock head%} {% block body %} {% load static %}
+
+
+<div class="container-fluid">
+
+	{% comment %} <div class="row">
+		<div class="col-xs-12 col-md-12" style="padding:10px;">
+			<div class="title-v1" >
+            	<h1>Acompanhe a programação da nossa Web TV</h1>
+            </div>
+			<div class="row">
+				<div class="col-xs-12 col-md-8 embed-responsive embed-responsive-16by9" >
+					<iframe frameborder="0" class="embed-responsive-item" scrolling="no" src="https://playerv.video.expressolider.com.br/video/viviretv/2/false/false/c3Rtdi52aWRlby5leHByZXNzb2xpZGVyLmNvbS5icisx/16:9/">
+					</iframe>
+				</div>
+				<div class="col-xs-12 col-md-4" style="margin: auto;">
+					<a href="https://wa.me/5511984969425" target="_blank"><img class="img-responsive" src="https://condominiosevizinhanca.com.br/static/assets/images/publi-tv.jpg"></a>
+				</div>
+			</div>
+		</div>
+	</div> {% endcomment %}
+      <div class="container-fluid">
+        <div class="technnology box space-30 row row-eq-height">
+          <div class="col-xs-12 col-md-12">
+            <div class="title-v1">
+              <h2>Ultimas Postagens</h2>
+            </div>
+            <!-- End title -->
+			<div class='container-fluid'>
+				<div class='row'>
+					<div class="col-xs-12 col-md-8">
+						<div class='container-fluid'>
+            				{% for artigo in listas %}
+							{% if forloop.counter|divisibleby:2 %}
+                                <div class="artigo-publicidade">
+                                    <script  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+																	<ins class="adsbygoogle"
+																		style="display:block"
+																		data-ad-format="fluid"
+																		data-ad-layout-key="-fb+5w+4e-db+86"
+																		data-ad-client="ca-pub-5786248284198381"
+																		data-ad-slot="4241003547"></ins>
+																	<script>
+																		(adsbygoogle = window.adsbygoogle || []).push({});
+																	</script>
+                                </div>
+                                <!-- End item -->
+																{% endif %}
+							{% if artigo.title %}
+								{% include 'homepage/home_article.html' %}
+							{% endif %}
+							{% if artigo.nome %}
+								{% include 'homepage/home_local.html' %}
+							{% endif %}
+							{% if artigo.type == 'post' %}
+								{% include 'homepage/home_post.html' %}
+							{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+					<!-- End item -->
+			</div>
+
+          </div>
+        </div>
+      </div>
+										
+				<script>		
+				
+				
+				</script>						
+																				
+
+      {% endblock body %}
+

@@ -1,0 +1,75 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+Promoções
+{% endblock title %}
+
+{% block buttonup %}
+<a href="{% url 'painel:CriarPromocoesDash' %}" class="btn btn-light-warning font-weight-bolder btn-sm">Criar nova Promoção</a>
+{% endblock buttonup %}
+    
+
+{% block body %}
+{% load static %}
+<style>
+.row.no-gutters {
+    padding: 10px;
+}
+.col-md-6 > a {
+    color: black;
+}
+</style>
+
+
+<div class="container">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  	<div class="row">
+		{% for promocao in promocoes %}
+		
+			<div class="card mb-3 col-12" >
+				<div class="row no-gutters">
+					<div class="col-md-2">
+													{% if promocao.fotoDoAnuncio %}
+								<img src="{{promocao.fotoDoAnuncio.url}}" title="{{promocao.nome}}" alt="{{promocao.nome}}" class="card-img"/>
+							{% else %}
+								<img src="{% static  '/images/sem-foto.jpg' %}" class="card-img" title="{{promocao.nome}}" alt="{{promocao.nomeDaOferta}}" />
+							{% endif %}
+					</div>
+					<div class="col-md-6">
+					<a href="{% url 'painel:DetalhesDaPromocoesDash' promocao.slug %}">
+						<div class="card-body">
+							<h5 class="card-title">{{promocao.nomeDaOferta}}</h5>
+							<h5 class="card-text"><small class="text-muted">{{promocao.categoria}}</small></h5>
+							<p class="card-text">{{promocao.info|safe|striptags}}</p>
+							<p class="card-text"><strong>De:</strong>{{promocao.precoReal}} <strong>Por:</strong> {{promocao.precoPromocional}} <br /><strong>Até:</strong> {{promocao.prazoDaOferta}}</p>
+							<p class="card-text"><small class="text-muted">{{promocao.dataCriacao}}</small></p>
+
+
+							
+
+
+						</div>
+						
+					</a>
+					</div>
+					<div class="col-md-2">
+						<div class="container">
+						<div class="row">
+							<a href="{% url 'painel:DetalhesDaPromocoesDash' promocao.slug %}atualizar" class="btn btn-outline-success btn-block">Alterar</a>
+							<a href="{% url 'painel:DetalhesDaPromocoesDash' promocao.slug %}excluir" class="btn btn-outline-danger btn-block">Excluir</a>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+
+		{% endfor %}
+		
+	</div>
+</div>
+
+
+
+{% endblock body %}
+    

@@ -1,0 +1,69 @@
+{% extends 'base_dash.html' %}
+
+{% block title %}
+{{promocao.nomeDaOferta}} - Promoções
+{% endblock title %}
+    
+
+{% block body %}
+{% load static %}
+
+<style>
+.row.no-gutters {
+    padding: 10px;
+}
+</style>
+
+
+<div class="container">
+  	<div class="row">
+		<div class="card mb-3 col-12" >
+			<div class="row no-gutters">
+				<h2 class="card-title">{{promocao.nomeDaOferta}}</h2>
+					<div class="container">
+						<div class="row">
+						<div class="col-md-2">
+							{% if promocao.fotoDoAnuncio %}
+								<img src="{{promocao.fotoDoAnuncio.url}}" title="{{promocao.nomeDaOferta}}" alt="{{promocao.nomeDaOferta}}" class="card-img"/>
+							{% else %}
+								<img src="{% static  '/images/sem-foto.jpg' %}" class="card-img" title="{{promocao.nomeDaOferta}}" alt="{{promocao.nomeDaOferta}}" />
+							{% endif %}
+						</div>
+						<div class="col-10">
+							<h5 class="card-text"><small class="text-muted">{{promocao.categoria}}</small></h5>
+							<h5 class="card-text"><small class="text-muted">{{promocao.anuncio}}</small></h5>
+							<p class="card-text"><strong>Link Para Obter a Promoção:</strong></p>
+							<p class="card-text">{{promocao.linkDeCompra}}</p>
+							<p class="card-text"><strong>Descrição:</strong></p>
+							<p class="card-text">{{promocao.info|safe|striptags}}</p>
+							<p class="card-text"><strong>Preço Original: </strong>{{promocao.precoReal}}</p>
+							<p class="card-text"><strong>Preço com Desconto:</strong> {{promocao.precoPromocional}}</p>
+							<p class="card-text"><strong>Data Limite da Promoção: </strong> {{promocao.prazoDaOferta}}</p>
+							<p class="card-text"><small class="text-muted">{{promocao.dataCriacao}}</small></p>
+													<div class="container">
+						<div class="row">
+							<button type="button" class="btn btn-outline-success btn-block">Alterar</button>
+							<button type="button" class="btn btn-outline-danger btn-block">Excluir</button>
+						</div>
+						</div>
+
+						</div>
+						
+						</div>
+					</div>
+
+			</div>
+
+		</div>
+
+
+
+		
+	</div>
+</div>
+
+
+
+
+{% endblock body %}
+    

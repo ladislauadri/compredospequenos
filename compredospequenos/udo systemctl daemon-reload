@@ -1,0 +1,15 @@
+[0;1;31mWarning:[0m The unit file, source configuration file or drop-ins of gunicorn.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+[0;1;31m●[0m gunicorn.service - gunicorn daemon
+   Loaded: loaded (/etc/systemd/system/gunicorn.service; enabled; vendor preset: enabled)
+   Active: [0;1;31mfailed[0m (Result: exit-code) since Tue 2020-12-22 04:51:59 -03; 32s ago
+  Process: 22630 ExecStart=/var/django/compredospequenos/viviremediavenv/bin/gunicorn --workers 3 --bind unix:gunicorn.sock -m 007 compredospequenos.wsgi:application [0;1;31m(code=exited, status=203/EXEC)[0m
+ Main PID: 22630 (code=exited, status=203/EXEC)
+
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: Started gunicorn daemon.
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[22630]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed to execute command: No such file or directory[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[22630]: [0;1;31m[0;1;39m[0;1;31mgunicorn.service: Failed at step EXEC spawning /var/django/compredospequenos/viviremediavenv/bin/gunicorn: No such file or directory[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=203/EXEC[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Start request repeated too quickly.[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Failed with result 'exit-code'.[0m
+dez 22 04:51:59 condominiosevizinhanca.com.br systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start gunicorn daemon.[0m

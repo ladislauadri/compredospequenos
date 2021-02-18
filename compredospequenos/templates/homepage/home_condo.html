@@ -1,0 +1,145 @@
+{% extends 'base_condo.html' %} {% block title %}Movimento Pequeno Sem Crise - Guia de
+Negócios Locais {% endblock title %} {% block head%}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap" rel="stylesheet"> 
+<style>
+  .card-body > h2 > a {
+    display: inline-block;
+    width: 100%;
+    padding-left: 10px;
+    position: relative;
+    color: black;
+    transition: all 0.5s ease 0s;
+    font: 400 30px/32px "Oswald";
+	border-left: 10px red solid;
+    padding-left: 10px;
+  }
+  .tag > p > i {
+    padding: 0 8px;
+  }
+  .tag > a > i {
+    padding: 0 8px;
+  }
+  .article-author-profile-image {
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+  }
+  img.article-author-profile-image {
+    border-radius: 35px;
+  }
+.google-auto-placed {
+
+    display: none;
+}
+
+.tag-item > i {
+    margin: 0 10px;
+}
+.tag-item > a > i {
+    margin: 0 10px;
+}
+.tag {
+    font-size: 12px;
+}
+.title-v1 > h3 {
+    font: 400 36px/36px "Oswald";
+    border-left: 10px red solid;
+    margin: 30px;
+    padding-left: 10px;
+}
+.artigo-lista {
+
+    padding: 10px 0;
+}
+.artigo-publicidade {
+    max-width: 900px;
+}
+</style>
+{% endblock head%} {% block body %} {% load static %}
+
+<div class="container=fluid">
+
+      <div class="container-fluid">
+        <div class="technnology box space-30 row row-eq-height">
+          <div class="col-xs-12 col-md-12">
+            <div class="title-v1">
+              <h3>Ultimas Postagens</h3>
+            </div>
+            <!-- End title -->
+			<div class='container-fluid'>
+				<div class='row'>
+					<div class="col-xs-12 col-md-12">
+						<div class='container-fluid'>
+            				{% for artigo in listaDeArtigos %}
+							{% if forloop.counter|divisibleby:2 %}
+                                <div class="artigo-publicidade">
+                                    <script  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+																	<ins class="adsbygoogle"
+																		style="display:block"
+																		data-ad-format="fluid"
+																		data-ad-layout-key="-fb+5w+4e-db+86"
+																		data-ad-client="ca-pub-5786248284198381"
+																		data-ad-slot="4241003547"></ins>
+																	<script>
+																		(adsbygoogle = window.adsbygoogle || []).push({});
+																	</script>
+                                </div>
+                                <!-- End item -->
+																{% endif %}
+							<div class='row row-eq-height artigo-lista'>
+								<div class="col-xs-12 col-md-5" style='background-image:url("{{artigo.image.url}}"); background-size: cover; background-repeat:no-repeat; min-height:200px;'>
+									<div>
+										<a class="images" href="{{ artigo.get_absolute_url }}" title="{{ artigo.title }}">
+									</div>
+									<a class="images" href="{{ artigo.get_absolute_url }}" title="{{ artigo.title }}" >
+								</div>
+								<div class="col-xs-12 col-md-7">
+									<div class="card-body">
+										<h2><a href="{{ artigo.get_absolute_url }}" title="title" >{{ artigo.title }}</a></h2>
+										<div style="margin-bottom: 10px">
+											<a class="avatar" href="{% url 'blog:author_articles' artigo.author.username %}">
+												<img src="{{ artigo.author.profile.image.url }}" alt="Profile Image"  class="article-author-profile-image"/>
+											</a>
+											Por <a class="name" href="{% url 'blog:author_articles' artigo.author.username %}" > <b>{{ artigo.author.get_full_name }}</b></a>
+										</div>
+										<!-- post-info -->
+										<div class="tag">
+											<div class="container-fluid">
+												<div class="row">
+													<p class="tag-item">
+														<i class="fab fa-readme"></i>{{ artigo.read_time }} min{{ artigo.read_time|pluralize }} 
+														<span> / </span>
+														<i class="far fa-eye"></i>{{ artigo.views }} vezes
+														<span>/</span>
+														<i class="far fa-clock"></i>Há {{artigo.date_published|timesince }} 
+														<span>  /</span>
+														<a class="tag-link" href="#" title="comments"><i class="fa fa-comments"></i>{{ artigo.comments.count }} comentários </a>
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<a href="{{ artigo.get_absolute_url }}" title="readMore" class="btn btn-sm btn-outline-secondary read-more" style="width: 100%">Leia este artigo</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+					<!-- End item -->
+			</div>
+
+          </div>
+        </div>
+      </div>
+
+      {% endblock body %}
+

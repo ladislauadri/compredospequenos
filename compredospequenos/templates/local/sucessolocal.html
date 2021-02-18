@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+{% load static %}
+
+
+
+
+<main>
+	<div id="hero_register">
+		<div class="container margin_120_95">			
+			<div class="row">
+				<p>Olá {{ user.username }}, Muito obrigado por cadastrar seu negócio no Pequeno Sem Crise. Se você tem dúvidas sobre os próximos passos,
+					mande uma mensagem para nós por meio dos contatos no rodapé.</p>
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /hero_register -->
+</main>
+<!-- /main -->
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load static %}
+
+
+
+
+<main>
+	<div class="bg_color_2">
+		<div class="container margin_60_35">
+			<div id="login-2">
+				<h1>Entre na sua conta do MPSC!</h1>
+				{% if user.is_authenticated %}
+					<p>Olá {{ user.username }}, parece que você já está logado em nosso sistema e por questões de segurança, desabilitamos essa página.</p>
+					{% else %}
+				<form  method="post" action="{% url 'contas:login' %}">
+					{% if form.errors %}
+							<p>Your username and password didn't match. Please try again.</p>
+						{% endif %}
+						{% csrf_token %}
+					<div class="box_form clearfix">
+						<div class="box_login">
+							<p>O Login Social estará disponível em breve.</p>
+
+						</div>
+						<div class="box_login last">
+							<div class="form-group">
+								{{ form.username.label_tag }}
+								{{ form.username }}
+							</div>
+							<div class="form-group">
+									{{ form.password.label_tag }}
+									{{ form.password }}
+								<a href="{% url 'contas:password_reset' %}">Esqueceu a senha?</a>
+							</div>
+							<div class="form-group">
+								<input class="btn_1" type="submit" value="Login">
+							</div>
+						</div>
+					</div>
+					
+				</form>
+				<h6 class="text-center link_bright"> Ainda não tem conta? <strong><a href="/contas/registro">Crie a sua agora</a></strong>. </h6>
+				{% endif %}
+			</div>
+			<!-- /login -->
+		</div>
+	</div>
+</main>
+<!-- /main -->
+
+
+
+
+
+{% endblock body %}

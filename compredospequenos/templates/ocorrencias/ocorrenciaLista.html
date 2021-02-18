@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}VAMORESOLVÊ - Plataforma comunitária de resolução de demandas
+{% endblock title %}
+
+{% block head%}
+<script>
+  const here = {
+    apiKey: '{{apiKey}}'
+  }
+  const style = 'reduced.night';
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+crossorigin=""></script>
+<style>
+
+h1 {
+    display: inline-block;
+    width: 100%;
+    padding-left: 10px;
+    position: relative;
+    color: purple;
+    font: 400 36px/36px "Oswald";
+    border-left: 10px red solid;
+    margin: 30px;
+    padding-left: 10px;;
+}
+h2 {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    color: black;
+    font: 400 25px/25px "Oswald";
+    margin: 30px;
+    padding-left: 10px;;
+}
+.tag > p > i {
+    padding: 0 8px;
+}
+.tag > a > i {
+    padding: 0 8px;
+}
+.article-author-profile-image {
+	width: 50px;
+ height: 50px;
+ max-width: 50px;
+ max-height: 50px;
+ object-fit: cover;
+}
+img.article-author-profile-image {
+	border-radius: 35px;
+}
+.row > .google-auto-placed {
+  width: 1px;
+  height: 1px;
+  display: none;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Article",
+  "name" : "VAMORESOLVÊ - Plataforma comunitária de resolução de demandas",
+  "author" : {
+    "@type" : "Person",
+    "name" : "Adriano Ladislau"
+  },
+  "datePublished" : "03/02/2021",
+  "image" : "https://condominiosevizinhanca.com.br/static/assets/images/vamoresolve.png",
+  "ocorrenciaSection" : "{{ocorrencia.categoria}}",
+  "ocorrenciaBody" : "Tem um buraco na sua rua que já comemorou aniversário? O lixo nas ruas está se 
+  amontoando?Infelizmente, a grande maioria das demandas da nossa vida cotidiana só são resolvidas se 
+  cobrarmos constantemente. Essa é a idéia do VamoResolvê - unir nossas demandas públicas e criar um sistema 
+  efetivo de cobrança, para que os responsáveis tomem ações cada vez mais rápidas.  Se você está com um 
+  problema, entra na sua conta do Condomínios & Vizinhança e conta ele pra gente aqui embaixo. Teremos o 
+  prazer de cobrar com você até que ele seja resolvido."
+}
+</script>
+{% comment %} <meta property="og:url" content="{{ ocorrencia.get_absolute_url }}" /> {% endcomment %}
+<meta property="og:title" content="{{ocorrencia.titulo}}" />
+<meta property="og:description" content="Tem um buraco na sua rua que já comemorou aniversário? O lixo nas ruas está se 
+  amontoando?Infelizmente, a grande maioria das demandas da nossa vida cotidiana só são resolvidas se 
+  cobrarmos constantemente. Essa é a idéia do VamoResolvê - unir nossas demandas públicas e criar um sistema 
+  efetivo de cobrança, para que os responsáveis tomem ações cada vez mais rápidas.  Se você está com um 
+  problema, entra na sua conta do Condomínios & Vizinhança e conta ele pra gente aqui embaixo. Teremos o 
+  prazer de cobrar com você até que ele seja resolvido." />
+<meta property="og:image" content="https://condominiosevizinhanca.com.br/static/assets/images/vamoresolve.png" />
+<meta property="og:image:alt" content="{{ocorrencia.title}}" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="{{ocorrencia.title}}" />
+<meta property="twitter:description" content="Tem um buraco na sua rua que já comemorou aniversário? O lixo nas ruas está se 
+  amontoando?Infelizmente, a grande maioria das demandas da nossa vida cotidiana só são resolvidas se 
+  cobrarmos constantemente. Essa é a idéia do VamoResolvê - unir nossas demandas públicas e criar um sistema 
+  efetivo de cobrança, para que os responsáveis tomem ações cada vez mais rápidas.  Se você está com um 
+  problema, entra na sua conta do Condomínios & Vizinhança e conta ele pra gente aqui embaixo. Teremos o 
+  prazer de cobrar com você até que ele seja resolvido." />
+<meta property="twitter:image" content="https://condominiosevizinhanca.com.br/static/assets/images/vamoresolve.png" />
+{% endblock head%}
+
+{% block body %}
+{% load l10n %}
+
+{% load static %}
+
+
+
+
+
+<div class="container">
+  <div class="row">
+  <h1>VamoResolvê! - Plataforma Comunitária de Resolução de demandas</h1>
+  <h2>Tem um buraco na sua rua que já comemorou aniversário? O lixo nas ruas está se amontoando?</h2>
+  <p>Infelizmente, a grande maioria das demandas da nossa vida cotidiana só são resolvidas se cobrarmos 
+  constantemente. <span style="font-weight:900;">Essa é a idéia do VamoResolvê </span>- unir nossas demandas
+  públicas e criar um sistema efetivo de cobrança, para que os responsáveis tomem ações cada vez mais rápidas.
+  Se você está com um problema, entra na sua conta do Condomínios & Vizinhança e conta ele pra gente aqui embaixo.
+	Teremos o prazer de cobrar com você até que ele seja resolvido.</p>
+	<div class="col-12">
+  	{% if user.is_authenticated %}
+
+			<a href="{% url 'ocorrencias:criarOcorrencia' %}"<button type="button" class="btn btn-outline-success">Escreva seu problema</button></a>
+  	{% else %}
+	  <a href="{% url 'ocorrencias:criarOcorrencia' %}"<button type="button" class="btn btn-outline-success">Escreva seu problema</button></a>
+	  	<a href="{% url 'contas:login' %}" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-danger">Entrar na sua conta</button>
+                         </a>
+                        <a href="{% url 'contas:register' %}" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-danger">Registrar um novo usuário</button>
+                         </a>
+
+  	{% endif %}
+	  </div>
+	
+      <div class="list-group d-flex flex-grow-1">
+        {% for ocorrencia in listaDeOcorrencias %}
+          <a href="{% url 'ocorrencias:detalhesDaOcorrencia' ocorrencia.slug  %}" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-3 col-md-3">
+                  <div style="width: 100%; height:100px;" id="map{{ocorrencia.id}}"></div>
+                </div>
+                <div class="col-xs-8 col-md-8">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+						{% if ocorrencia.endereco %}
+							{{ocorrencia.endereco}} 
+						{% endif %}
+						{% if ocorrencia.numero %}
+							{{ocorrencia.numero}}
+						{% endif %} 
+						{% if ocorrencia.complemento %}
+							- {{ocorrencia.complemento}}
+						{% endif %}
+						{% if ocorrencia.complemento %}
+							 - {{ocorrencia.cep}}
+						{% endif %}
+
+                    </h5>
+                    <small>{{ocorrencia.dataCriacao|timesince}}</small>
+                  </div>
+                  <p class="mb-1">{{ocorrencia.titulo}}</p>
+                  <small>{{ocorrencia.descrição|safe}}</small>
+                  
+                  
+                </div>
+
+              </div>
+
+            </div>
+          </a>
+          <script>
+
+            
+            let mymap{{ocorrencia.id}} = L.map(map{{ocorrencia.id}}).setView([{% localize off %}{{ocorrencia.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{ocorrencia.localizacao.x|unlocalize }}{% endlocalize %}], 15);
+            mapLink =
+              '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+            L.tileLayer(
+              `https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?apiKey=${here.apiKey}&ppi=320`, {
+                attribution: '&copy; ' + mapLink + ' Contributors',
+                maxZoom: 18,
+              }).addTo(mymap{{ocorrencia.id}});
+    
+    
+    
+            </script> 
+            <script>
+                                var fontAwesomeIcon = L.divIcon({
+                                  html: '<div class="mapIconCat" style="">{{ocorrencia.categoria.imagem.as_html}}</div>',
+                                  iconSize: [20, 20],
+                                  className: 'myDivIcon'
+                              });
+    
+							L.circle([{% localize off %}{{ocorrencia.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{ocorrencia.localizacao.x|unlocalize }}{% endlocalize %}], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 50
+}).addTo(mymap{{ocorrencia.id}});
+                            
+          </script>
+        {% endfor %}
+
+      </div>
+      <script>
+        const here = {
+          apiKey:'Sco_-HzVL-53Drcv-N4lRio6YmYRJN9Bj7UmgbAB80I'
+        }
+        const style = 'reduced.night';
+        let mymap = L.map('map').setView([{% localize off %}{{ocorrencia.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{ocorrencia.localizacao.x|unlocalize }}{% endlocalize %}], 10);
+        mapLink =
+          '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer(
+          `https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?apiKey=${here.apiKey}&ppi=320`, {
+            attribution: '&copy; ' + mapLink + ' Contributors',
+            maxZoom: 18,
+          }).addTo(mymap);
+
+
+
+        </script> 
+        <script>
+                            var fontAwesomeIcon = L.divIcon({
+                              html: '<div class="mapIconCat" style="">{{ocorrencia.categoria.imagem.as_html}}</div>',
+                              iconSize: [20, 20],
+                              className: 'myDivIcon'
+                          });
+
+                        L.marker([{% localize off %}{{ocorrencia.localizacao.y|unlocalize }}{% endlocalize %}, {% localize off %} {{ocorrencia.localizacao.x|unlocalize }}{% endlocalize %}],{ icon:  fontAwesomeIcon}).addTo(mymap)
+                        
+      </script>
+
+  </div>
+
+</div>
+
+
+
+{% endblock body %}

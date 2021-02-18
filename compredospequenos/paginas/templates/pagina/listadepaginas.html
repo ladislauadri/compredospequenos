@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Anuncios
+{% endblock title %}
+    
+
+{% block buttonup %}
+<a href="{% url 'painel:CriarAnunciosDash' %}" class="btn btn-light-warning font-weight-bolder btn-sm">Criar novo Anuncio</a>
+{% endblock buttonup %}
+
+{% block body %}
+{% load static %}
+
+
+
+<div class="container">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+  	<div class="row">
+		{% for pagina in paginas %}
+			<div class="card mb-3 col-12" >
+				<div class="row no-gutters">
+
+					<div class="col-md-2">
+						<div class="container">
+							<div class="row">
+								<a href="{% url 'paginas:DetalhesDaPagina' pagina.slug %}" class="btn btn-outline-success btn-block">{{pagina.nomedaPagina}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		{% endfor %}
+		
+	</div>
+</div>
+
+
+
+{% endblock body %}
+    

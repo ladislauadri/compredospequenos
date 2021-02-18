@@ -1,0 +1,715 @@
+{% load static %}
+{% load fontawesome_5 %}
+
+{% load gravatar %}
+
+<!DOCTYPE html>
+{% comment %} <html lang="pt-br">
+
+
+
+<head>
+    <base href="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKW7L1Y4M5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DKW7L1Y4M5');
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <meta name="description" content="Updates and statistics" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" content="text/html; charset=utf-8" />
+
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <link rel="stylesheet" type="text/css" href="{% static  'assets/css/style.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static  'assets/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static  'assets/vendor/owl-slider.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static  'assets/vendor/settings.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static  'assets/vendor/custombox.min.css' %}" />
+    <!--begin::Page Vendors Styles(used by this page)-->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% fontawesome_5_static %}
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" href="{% static  'aassets/images/favicon.png' %}" />
+
+    <script data-ad-client="ca-pub-5786248284198381" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '3829202480488199');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=3829202480488199&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Global site tag (gtag.js) - Google Ads: 1036854820 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1036854820"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-1036854820');
+    </script>
+    <!-- Event snippet for formulário de lead MPSC conversion page -->
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-1036854820/J0uXCPaJo9MBEKTMtO4D' });
+    </script>
+    {% block head%}
+    {% endblock head%}
+
+
+    <style>
+        @media (min-width: 992px) {
+            .header-fixed.subheader-fixed.subheader-enabled .wrapper {
+                padding-top: 0;
+            }
+
+        }
+
+        iframe {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+        }
+
+        a.nav-item.nav-link {
+            float: left;
+            margin: 10px;
+            color: black;
+        }
+
+        a.nav-item.nav-link.active {
+            border-bottom: 5px purple solid;
+            padding: 1px;
+        }
+
+        nav.navbar.navbar-light.bg-light {
+            font-size: 20px;
+        }
+
+        .social.text-white>a>i {
+            color: white;
+        }
+
+        .text-white>a {
+            color: white !important;
+        }
+
+        .social.text-white>a>i:hover {
+            color: purple;
+        }
+
+        button.btn.btn-outline-success {
+            height: 30px;
+        }
+
+        #darknav {
+            margin-bottom: 0px;
+        }
+
+        .search-button-top {
+            height: 100% !important;
+            width: 100px !important;
+        }
+
+        .search-box-top {
+            float: left;
+        }
+
+        .login-button-name {
+            font-size: 1.3rem;
+        }
+    </style>
+
+
+
+
+
+</head>
+<!--end::Head-->
+
+<body>
+
+
+    <div class="wrappage container-fluid">
+
+        <div class="row">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <div class="col">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'home' %}" title="Viviré Media" style="padding: 0 20px;">
+                            {% comment %} <a class="navbar-brand" href="#" title="Viviré Media"
+                                style="padding: 0 20px;">
+
+                                <img src="{% static  'assets/images/logo.png'%}" alt="images" class="">
+
+                            </a>
+
+                    </div>
+                    <div class="col row d-flex " id="navbarSupportedContent">
+                        <!-- <a class="nav-item nav-link " aria-current="page" href="#">Home</a>
+                        <a class="nav-item nav-link " aria-current="page" href="{% url 'blog:home' %}">Artigos</a>
+                        <a class="nav-item nav-link " aria-current="page" href="#">Videos</a>
+                        <a class="nav-item nav-link " aria-current="page" href="#">Quizzes</a> -->
+                        <div>
+                           
+
+                            <div class="btn-group d-none d-md-block" role="group">
+                                <button id="btnGroupDrop1" type="button" class="" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <img class="round" src="{% gravatar_url user.email 150 %}" alt="avatar" height="40"
+                                        width="40">
+                                    <span class="login-button-name">Olá {{user.get_full_name}}</span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="collapse" id="navbarToggleExternalContent">
+                    <div class='col-xs-12' style="margin: 0 auto; ">
+                        <div class="social " style="margin: 10px auto;">
+                            <a href="#" title="texto" class="widget-title">
+                                <h3>Conecte-se com as nossas redes sociais</h3>
+                            </a>
+                            <a href="#" title="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" title="facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" title="telegram"><i class="fab fa-telegram"></i></a>
+                            <a href="#" title="messenger"><i class="fab fa-facebook-messenger"></i></a>
+                            <a href="#" title="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="widget col-xs-6 col-md-3">
+                            <h3 class="widget-title">Nossos Canais</h3>
+                            <ul>
+                                <li><a href="#" title="Condomínios & Vizinhança">Condomínios & Vizinhança</a></li>
+                                <li><a href="#" title="O Santuário Geek">O Santuário Geek</a></li>
+                                <li><a href="#" title="Bola na Área F.C">Bola na Área F.C</a></li>
+                                <li><a href="#" title="Pequeno Sem Crise">Pequeno Sem Crise</a></li>
+                                <li><a href="#" title="Só Descontasso">Só Descontasso</a></li>
+                            </ul>
+                        </div>
+                        <div class="widget col-xs-6 col-md-3">
+                            <h3 class="widget-title">Nossos Canais</h3>
+                            <ul>
+                                <li><a href="#" title="Condomínios & Vizinhança">Condomínios & Vizinhança</a></li>
+                                <li><a href="#" title="O Santuário Geek">O Santuário Geek</a></li>
+                                <li><a href="#" title="Bola na Área F.C">Bola na Área F.C</a></li>
+                                <li><a href="#" title="Pequeno Sem Crise">Pequeno Sem Crise</a></li>
+                                <li><a href="#" title="Só Descontasso">Só Descontasso</a></li>
+                            </ul>
+                        </div>
+                        <div class="widget col-xs-6 col-md-3">
+                            <h3 class="widget-title">Nossos Canais</h3>
+                            <ul>
+                                <li><a href="#" title="Condomínios & Vizinhança">Condomínios & Vizinhança</a></li>
+                                <li><a href="#" title="O Santuário Geek">O Santuário Geek</a></li>
+                                <li><a href="#" title="Bola na Área F.C">Bola na Área F.C</a></li>
+                                <li><a href="#" title="Pequeno Sem Crise">Pequeno Sem Crise</a></li>
+                                <li><a href="#" title="Só Descontasso">Só Descontasso</a></li>
+                            </ul>
+                        </div>
+                        <div class="widget col-xs-6 col-md-3">
+                            <h3 class="widget-title">Nossos Canais</h3>
+                            <ul>
+                                <li><a href="#" title="Condomínios & Vizinhança">Condomínios & Vizinhança</a></li>
+                                <li><a href="#" title="O Santuário Geek">O Santuário Geek</a></li>
+                                <li><a href="#" title="Bola na Área F.C">Bola na Área F.C</a></li>
+                                <li><a href="#" title="Pequeno Sem Crise">Pequeno Sem Crise</a></li>
+                                <li><a href="#" title="Só Descontasso">Só Descontasso</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="sidebar-sticky col-md-2 d-sm-none sticky-top d-md-block"
+                style="position: sticky; height: 70vh;">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Página Inicial
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'blog:home' %}">
+                            <i class="far fa-newspaper"></i> Artigos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'locais:listaDeLocais' %}">
+                            <i class="fas fa-store-alt"></i> Marketplace
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div class="col-md-10 col-sm-12">
+                {% block body %}
+                {% endblock body %}
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div id="back-to-top">
+                <i class="fas fa-long-arrow-alt-up"></i>
+            </div>
+            <footer id="footer" class="footer-v2 footer-v3">
+                <div class="container">
+                    <div class="social">
+                        <a href="#" title="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" title="facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="youtube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="#" title="messenger"><i class="fab fa-facebook-messenger"></i></a>
+                        <a href="#" title="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Nossos Canais</h3>
+                                    <ul>
+                                        <li><a href="#" title="Condomínios & Vizinhança">Condomínios & Vizinhança</a>
+                                        </li>
+                                        <li><a href="#" title="O Santuário Geek">O Santuário Geek</a></li>
+                                        <li><a href="#" title="Bola na Área F.C">Bola na Área F.C</a></li>
+                                        <li><a href="#" title="Pequeno Sem Crise">Pequeno Sem Crise</a></li>
+                                        <li><a href="#" title="Só Descontasso">Só Descontasso</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Arte e Entretenimento</h3>
+                                    <ul>
+                                        <li><a href="#" title="Livros">Livros</a></li>
+                                        <li><a href="#" title="Filmes">Filmes</a></li>
+                                        <li><a href="#" title="Musica">Musica</a></li>
+                                        <li><a href="#" title="Séries">Séries</a></li>
+                                        <li><a href="#" title="Videos">Videos</a></li>
+                                        <li><a href="#" title="Podcasts">Podcasts</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Esportes</h3>
+                                    <ul>
+                                        <li><a href="#" title="Futebol">Futebol</a></li>
+                                        <li><a href="#" title="E-Sports">E-Sports</a></li>
+                                        <li><a href="#" title="Basquete">Basquete</a></li>
+                                        <li><a href="#" title="Volei">Volei</a></li>
+                                        <li><a href="#" title="Volei">Olimpíadas</a></li>
+                                        <li><a href="#" title="F1 ">F1</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Tech</h3>
+                                    <ul>
+                                        <li><a href="#" title="Jogos">Jogos</a></li>
+                                        <li><a href="#" title="Celulares">Celulares</a></li>
+                                        <li><a href="#" title="Consoles">Consoles</a></li>
+                                        <li><a href="#" title="Softwares">Softwares</a></li>
+                                        <li><a href="#" title="Hardwares">Hardwares</a></li>
+                                        <li><a href="#" title="Gadgets">Gadgets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Lifesyle</h3>
+                                    <ul>
+                                        <li><a href="#" title="LGBTQ">LGBTQ</a></li>
+                                        <li><a href="#" title="Pets">Pets</a></li>
+                                        <li><a href="#" title="Relacionamentos">Relacionamentos</a></li>
+                                        <li><a href="#" title="Moda">Moda</a></li>
+                                        <li><a href="#" title="DIY">DIY</a></li>
+                                        <li><a href="#" title="Pais e Filhos">Pais e Filhos</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-2 col-sm-6">
+                                <div class="widget menu-footer-v2">
+                                    <h3 class="widget-title">Notícias</h3>
+                                    <ul>
+                                        <li><a href="#" title="Brasil">Brasil</a></li>
+                                        <li><a href="#" title="Mundo">Mundo</a></li>
+                                        <li><a href="#" title="Economia">Economia</a></li>
+                                        <li><a href="#" title="Saúde">Saúde</a></li>
+                                        <li><a href="#" title="Educação">Educação</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End col-2 -->
+                            <div class="col-md-3 col-sm-12">
+                                {% comment %} <div class="widget newsletter-footer">
+                                    <h3 class="widget-title">NEWSLETTER</h3>
+                                    <p>Assine nosso boletim informativo e você receberá as últimas notícias todos os
+                                        dias
+                                    </p>
+                                    <form class="form-footer" action="#" method="get" accept-charset="utf-8">
+                                        <input type="text"
+                                            onblur="if (this.value == '') {this.value = 'Insira o email que você usa diariamente...';}"
+                                            onfocus="if(this.value != '') {this.value = '';}"
+                                            value="Insira o email que você usa diariamente..."
+                                            class="input-text required-entry validate-email"
+                                            title="Sign up for our newsletter" name="email">
+                                        <button class="button" title="Inscrever-se" type="submit"><i
+                                                class="fa fa-envelope"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End row -->
+                    </div>
+                    <!-- End container -->
+                </div>
+                <div class="footer-bottom float-left">
+                    <div class="border-top1">
+                        <div class="border-top2">
+                            <div class="container">
+                                <div class="float-left">
+                                    <a class="logo-footer" href="#" title="Logo"><img
+                                            src="{% static  'assets/images/logo-footer2.png'%}" alt="logo"></a>
+                                    <p>Copyright &copy;2018 - 2020 | <a href="#" title="title">Viviré Marketing</a>.</p>
+                                </div>
+                                <div class="float-right align-right">
+                                    <ul class="menu-footer">
+                                        {% comment %} <li><a href="#" title="Term">Term</a></li>
+                                        <li><a href="#" title="Privacy">Privacy</a></li>
+                                        <li><a href="#" title="Brand">Brand</a></li>
+                                        <li><a href="#" title="Conta">{% if user.is_authenticated %}
+                                                <a href="/contas/sair" aria-expanded="false"> Sair da sua conta</a>
+                                                {% else %}
+                                                <a href="/contas/entrar" aria-expanded="false">Entrar na sua conta</a>
+                                                {% endif %}</a></li>
+                                        {% if user.is_authenticated %}<li><a href="#" title="Registrar">
+                                                {% else %}
+                                        <li><a href="/contas/registro">Registrar um novo usuário</a></li>
+                                        </a></li>{% endif %}
+                                        {% comment %} <li><a href="#" title="Contact">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End border -->
+                    </div>
+                    <!-- End container -->
+                </div>
+            </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+    <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+    </div>
+    <!--end::Main-->
+
+    <script type="text/javascript" src="{% static  'assets/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static  'assets/js/bootstrap.js' %}"></script>
+
+    <script type="text/javascript" src="{% static  'assets/js/owl.carousel.min.js' %}"></script>
+    <script type="text/javascript" src="{% static  'assets/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <script type="text/javascript" src="{% static  'assets/js/jquery.themepunch.plugins.min.js' %}"></script>
+    <script type="text/javascript" src="{% static  'assets/js/engo-plugins.js' %}"></script>
+
+    <script type="text/javascript" src="{% static  'assets/js/custombox.min.js' %}"></script>
+    <script type="text/javascript" src="{% static  'assets/js/legacy.min.js' %}"></script>
+    <script type="text/javascript" src="{% static  'assets/js/store.js' %}"></script>
+    <script type="text/javascript">
+        $.expr[':'].external = function (obj) {
+            return !obj.href.match(/^mailto\:/)
+                && (obj.hostname != location.hostname)
+                && !obj.href.match(/^javascript\:/)
+                && !obj.href.match(/^$/)
+        };
+        $('a:external').attr('target', '_blank');
+    </script>
+
+</body>
+
+</html> {% endcomment %}
+
+<html lang="pt-br">
+
+<head>
+    <base href="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKW7L1Y4M5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DKW7L1Y4M5');
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <meta name="description" content="Updates and statistics" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" content="text/html; charset=utf-8" />
+
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% fontawesome_5_static %}
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" href="{% static  'aassets/images/favicon.png' %}" />
+
+    <script data-ad-client="ca-pub-5786248284198381" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '3829202480488199');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=3829202480488199&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
+    <!-- Global site tag (gtag.js) - Google Ads: 1036854820 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1036854820"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-1036854820');
+    </script>
+    <!-- Event snippet for formulário de lead MPSC conversion page -->
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-1036854820/J0uXCPaJo9MBEKTMtO4D' });
+    </script>
+    {% block head%}
+    {% endblock head%}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+    <style>
+        .container-fluid {
+            padding: 0;
+        }
+        img.img-responsive {
+            width: 100%;
+        }
+    </style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "4zacju7qce");
+</script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row row-eq-height">
+            <div class="col-md-2 d-none d-md-block"
+                style="position: sticky;">
+                <div class="flex-column sticky-top sidebar-sticky ">
+                <a class="navbar-brand" href="#" title="Viviré Media"
+                    style="padding: 0 20px;">
+                        <img src="{% static  'assets/images/logo.png'%}" alt="images" class="">
+                    </a>
+                <hr>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Página Inicial
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'blog:home' %}">
+                            <i class="far fa-newspaper"></i> Artigos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'locais:listaDeLocais' %}">
+                            <i class="fas fa-store-alt"></i> Marketplace
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'ocorrencias:ListaDeOcorrencias' %}">Problemas na Cidade</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+            <div class="col-xs-12 col-md-10">
+            <header class="col-xs-12 col-md-12" style="position: sticky;">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#" title="Viviré Media"
+                    style="padding: 0 20px;">
+                        <img src="{% static  'assets/images/logo.png'%}" alt="images" class="d-xs-block d-md-none">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Alterna navegação">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+
+                      <form class="form-inline d-flex flex-grow-1 search-box-top">
+                        <input class="form-control mr-sm-2 d-flex flex-grow-1 " type="search" onblur="if (this.value == '') {this.value = 'Faça aqui suas buscas';}"
+                        onfocus="if(this.value != '') {this.value = '';}" value="Faça aqui suas buscas"
+                        class="input-text required-entry validate-email" title="Faça suas buscas aqui"
+                        id="pesquisa" name="pesquisa" placeholder="Pesquisar">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                      </form>
+                    </div>
+                    <div>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'contas:logout' %}" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-danger">Sair da sua conta</button>
+                         </a>
+                    {% else %}
+                        <a href="{% url 'contas:login' %}" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-danger">Entrar na sua conta</button>
+                         </a>
+                        <a href="{% url 'contas:register' %}" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-danger">Registrar um novo usuário</button>
+                         </a>
+                        
+                    {% endif %}</a></li>
+
+                    </div>
+                  </nav>
+            </header>
+                {% block body %}
+                {% endblock body %}
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $.expr[':'].external = function (obj) {
+            return !obj.href.match(/^mailto\:/)
+                && (obj.hostname != location.hostname)
+                && !obj.href.match(/^javascript\:/)
+                && !obj.href.match(/^$/)
+        };
+        $('a:external').attr('target', '_blank');
+    </script>
+
+</body>
+
+</html>

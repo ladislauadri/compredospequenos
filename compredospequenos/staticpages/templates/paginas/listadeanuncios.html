@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load static %}
+
+
+<main>
+	<div id="results">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h4><strong>Showing 10</strong> of 140 results</h4>
+				</div>
+				<div class="col-md-6">
+					<div class="search_bar_list">
+						<input type="text" class="form-control" placeholder="Ex. Specialist, Name, Doctor...">
+						<input type="submit" value="Search">
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /results -->
+
+
+	
+	<div class="container margin_60_35">
+		<div class="row">
+			<div class="col-lg-7">
+
+				{% for anuncio in listaDeAnuncios %}
+				<div class="strip_list wow fadeIn">
+					<figure>
+						<a href="{% url 'anuncios:detalhesDoAnuncio' anuncio.slug %}">
+							{% if anuncio.logo %}
+								<img src="{{anuncio.logo.url}}" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" class="img-business"/>
+							{% else %}
+								<img src="{% static  '/images/sem-foto.jpg' %}" title="{{anuncio.nome}}" alt="{{anuncio.nome}}" />
+							{% endif %}
+						</a>
+					</figure>
+					<small>{{anuncio.categoria}}</small>
+					<h3>{{anuncio.nome}}</h3>
+					<p>{{anuncio.descricao}}</p>
+					<ul>
+						<li><a href="{% url 'anuncios:detalhesDoAnuncio' anuncio.slug %}">Ver mais</a></li>
+					</ul>
+				</div>
+				{% endfor %}
+
+				<!-- /strip_list -->
+
+				
+				<nav aria-label="" class="add_top_20">
+					<ul class="pagination pagination-sm">
+						{% if listaDeAnuncios.has_previous %}
+						<li class="page-item active">
+							<a class="page-link" href="?page=1" >Primeira</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeAnuncios.previous_page_number }}" tabindex="-1">Anterior</a>
+						</li>
+						{% endif %}
+						{% for pages in listaDeAnuncios.paginator.page_range %}
+						{% if listaDeAnuncios.number == pages %}
+						<li class="page-item active"><a href="" class="page-link">{{pages}}</a></li>
+						{% else %}
+						<li class="page-item"><a href="?page={{ pages }}" class="page-link">{{pages}}</a></li>
+						{% endif %}
+
+								{% endfor %}
+
+								{% if listaDeAnuncios.has_next %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeAnuncios.next_page_number }}">Próximo</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ listaDeAnuncios.paginator.num_pages }}">Último</a>
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+				<!-- /pagination -->
+			</div>
+			<!-- /col -->
+			
+			<aside class="col-lg-5" id="sidebar">
+				<div id="map_listing" class="normal_list">
+				</div>
+			</aside>
+			<!-- /aside -->
+			
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</main>
+
+
+
+{% endblock body %}
